@@ -1,0 +1,50 @@
+{% extends "unfold/base.html" %}
+{% block content %}
+  <div class="grid grid-cols-2 gap-4 mb-6">
+    <div class="rounded-xl p-4 bg-muted">
+      <h3 class="font-bold mb-2">Счета на оплату</h3>
+      <ul class="space-y-1">
+        {% for label, count in invoice_counts.items %}
+          <li>
+            <span class="font-semibold text-sm text-{{ label|lower|slugify }}">
+              {{ label }}
+            </span>: {{ count }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="rounded-xl p-4 bg-muted">
+      <h3 class="font-bold mb-2">Попытки оплаты</h3>
+      <ul class="space-y-1">
+        {% for label, count in payment_counts.items %}
+          <li>
+            <span class="font-semibold text-sm text-{{ label|lower|slugify }}">
+              {{ label }}
+            </span>: {{ count }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  {% if available_apps %}
+    <h2 class="text-lg font-bold mb-2">Модели:</h2>
+    <div class="grid grid-cols-2 gap-4">
+      {% for app in available_apps %}
+        <div class="bg-background p-4 rounded-xl border">
+          <h3 class="font-semibold mb-2">{{ app.name }}</h3>
+          <ul class="list-disc list-inside">
+            {% for model in payment.models %}
+              <li><a href="{{ model.admin_url }}" class="text-primary hover:underline">{{ model.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>You don’t have permission to view or edit anything.</p>
+  {% endif %}
+{% endblock %}
