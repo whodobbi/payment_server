@@ -118,7 +118,6 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -130,7 +129,6 @@ CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_TASK_SERIALIZER = "json"
 
 UNFOLD = {
-    "SITE_HEADER": "Unfold Admin",
     "SHOW_COUNTS": True,
     "DASHBOARD_CALLBACK": "payments.dashboard.dashboard_callback",
 }

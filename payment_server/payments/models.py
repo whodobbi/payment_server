@@ -74,5 +74,7 @@ class PaymentAttempt(models.Model):
             else:
                 self.status = PaymentStatus.DECLINED
 
+        super().save(*args, **kwargs)
+
     def __str__(self) -> str:
         return f"PaymentAttempt #{self.pk} - {self.status}"

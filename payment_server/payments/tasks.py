@@ -12,7 +12,7 @@ def mark_invoice_as_expired(invoice_id: int) -> None:
 
     try:
         invoice = Invoice.objects.get(pk=invoice_id)
-        if invoice.status == InvoiceStatus.PENDING and invoice.due_at < timezone.now():
+        if invoice.status == InvoiceStatus.PENDING and invoice.expires_at < timezone.now():
             invoice.status = InvoiceStatus.EXPIRED
             invoice.save()
     except Invoice.DoesNotExist:
